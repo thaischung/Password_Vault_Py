@@ -105,6 +105,15 @@ class PasswordHelper:
         # return the final result = derived key
         return result
 
+    # hashing utility 00
+    @staticmethod
+    def sha256_hash_util(value, salt):
+        # check if the value is an instance of a string
+        if isinstance(value, str):
+            value = value.encode()
+
+        # return the sha256 hash using our salt and the value passed
+        return hashlib.sha256(salt + value).digest()
 
 
 

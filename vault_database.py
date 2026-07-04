@@ -3,9 +3,9 @@ import sqlite3
 
 class VaultDatabase:
 
-    def __init__(self):   
+    def __init__(self, filename="vault.db"):   
         # connect to database (creates it if it doesn't exist)
-        self.connection = sqlite3.connect("vault.db")
+        self.connection = sqlite3.connect(filename)
 
         # create a cursor to execute commands
         self.cursor = self.connection.cursor()
