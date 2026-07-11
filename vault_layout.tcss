@@ -27,15 +27,15 @@ Screen {
     background: #080c10;
 }
 
-Vertical {
+#app_vertical {
     height: 100%;
 }
 
-#vault {
+#app_vertical > Horizontal {
     height: 1fr;
 }
 
-Horizontal {
+#vault {
     height: 1fr;
 }
 
@@ -59,4 +59,116 @@ EntryPanel {
 
 CommandPanel {
     padding: 1 0;
+}
+
+#add_entry_vertical {
+    width: 80%;
+    max-width: 120;
+    min-width: 60;
+    align: center middle;
+    padding: 2 4;
+    border: solid #1e2d3d;
+    background: #0d131c;
+    height: auto;
+}
+
+AddEntryScreen {
+    align: center middle;
+}
+
+#add_entry_vertical Vertical {
+    height: auto;
+}
+
+#add_entry_vertical Horizontal {
+    height: auto;
+}
+
+#security_footer {
+    margin-top: 1;
+}
+
+#button_row {
+    align-horizontal: right;
+    margin-top: 1;
+}
+
+#notes_input {
+    height: 5;
+}
+
+#password_row {
+    height: auto;
+}
+
+#add_form_title {
+    color: #00b4d8;
+    margin-bottom: 1;
+}
+
+#save {
+    margin-left: 1;
+    width: 12;
+    height: 3;
+}
+
+#cancel {
+    width: 12;
+    height: 3;
+}
+
+#password_row {
+    width: 100%;
+    height: 3;
+    margin: 1 1 1 0;
+}
+
+#password_input {
+    width: 1fr;
+    margin: 0;
+}
+
+#toggle_password {
+    margin-right: 1;
+}
+
+#confirmation_screen {
+    margin-left: 1;
+    margin-top: 1;
+}
+
+#confimation_input {
+    width: 70;
+}
+
+#search_vertical, #change_password_vertical, #help_vertical {
+    width: 80%;
+    max-width: 120;
+    min-width: 60;
+    height: auto;
+    padding: 2 4;
+    border: solid #1e2d3d;
+    background: #0d131c;
+}
+
+SearchScreen, ChangeMasterPasswordScreen, HelpScreen {
+    align: center middle;
+}
+
+#search_vertical Horizontal, #change_password_vertical Horizontal, #help_vertical Horizontal {
+    height: auto;
+}
+
+#search_vertical Vertical, #change_password_vertical Vertical, #help_vertical Vertical {
+    height: auto;
+}
+
+#search_title, #change_pw_title, #help_title {
+    color: #00b4d8;
+    margin-bottom: 1;
+}
+
+#search_results {
+    height: 10;
+    margin-top: 1;
 }

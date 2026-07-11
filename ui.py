@@ -226,6 +226,7 @@ class EntryPanel(Widget):
     def set_entry(self, entry):
         self.entry = entry
 
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # main app to display all the different components 
 class PasswordVault(App):
     CSS_PATH = "vault_layout.tcss"
