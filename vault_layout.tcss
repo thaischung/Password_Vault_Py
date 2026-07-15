@@ -161,9 +161,74 @@ SearchScreen, ChangeMasterPasswordScreen, HelpScreen {
 
 #search_vertical Vertical, #change_password_vertical Vertical, #help_vertical Vertical {
     height: auto;
+}#change_password_vertical {
+    padding: 2 4;
 }
 
-#search_title, #change_pw_title, #help_title {
+#change_password_vertical Input {
+    margin-top: 1;
+    margin-bottom: 1;
+}
+
+#change_pw_title {
+    margin-bottom: 1;
+}
+
+#change_pw_subtitle {
+    margin-bottom: 2;
+}
+
+#change_pw_buttons {
+    margin-top: 2;
+    height: auto;
+}
+
+#search_results {
+    height: 10;
+    margin-top: 1;
+}
+
+#confirmation_vertical {
+    width: 60%;
+    max-width: 80;
+    height: auto;
+    padding: 2 4;
+    border: solid #e05252;
+    background: #0d131c;
+}
+
+ConfirmationScreen {
+    align: center middle;
+}
+
+#confirmation_vertical Horizontal {
+    height: auto;
+    margin-top: 1;
+}
+
+#search_vertical, #help_vertical {
+    width: 80%;
+    max-width: 120;
+    min-width: 60;
+    height: auto;
+    padding: 2 4;
+    border: solid #1e2d3d;
+    background: #0d131c;
+}
+
+SearchScreen, HelpScreen {
+    align: center middle;
+}
+
+#search_vertical Vertical, #search_vertical Horizontal {
+    height: auto;
+}
+
+#help_vertical Vertical, #help_vertical Horizontal {
+    height: auto;
+}
+
+#search_title, #help_title {
     color: #00b4d8;
     margin-bottom: 1;
 }
@@ -171,4 +236,22 @@ SearchScreen, ChangeMasterPasswordScreen, HelpScreen {
 #search_results {
     height: 10;
     margin-top: 1;
+}
+
+#search_button_row, #change_pw_buttons {
+    height: auto;
+    margin-top: 1;
+}
+
+#help_commands {
+    margin-bottom: 1;
+}
+
+#help_vertical Button {
+    margin-top: 1;
+}
+
+HelpScreen Button:focus {
+    text-style: none;
+    background: #1a1a2e;
 }

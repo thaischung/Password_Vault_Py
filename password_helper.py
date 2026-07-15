@@ -2,7 +2,7 @@ from Crypto.Cipher import AES
 import os
 import hmac
 import hashlib
-import secrets
+import random
 import string
 
 # utility functions for managing the passwords 
@@ -127,15 +127,15 @@ class PasswordHelper:
         all_chars = lowercase + uppercase + numbers + symbols
         
         password = []
-        password.append(secrets.choice(lowercase))
-        password.append(secrets.choice(uppercase))
-        password.append(secrets.choice(numbers))
-        password.append(secrets.choice(symbols))
+        password.append(random.choice(lowercase))
+        password.append(random.choice(uppercase))
+        password.append(random.choice(numbers))
+        password.append(random.choice(symbols))
         
         for i in range(length - 4):
-            password.append(secrets.choice(all_chars))
+            password.append(random.choice(all_chars))
         
-        secrets.shuffle(password)
+        random.shuffle(password)
         return ''.join(password)
 
     @staticmethod

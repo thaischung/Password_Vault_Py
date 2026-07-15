@@ -73,7 +73,9 @@ class VaultDatabase:
     # get entry
     def get_entry(self, id):
         # check if the entry exists
-        self.cursor.execute("SELECT EXISTS (SELECT 1 FROM entries WHERE id = ?)", (id,))     
+        self.cursor.execute(
+            "SELECT EXISTS (SELECT 1 FROM entries WHERE id = ?)", (id,)
+            )     
 
         # if there is not entry found exit
         if(self.cursor.fetchone()[0] != 1):
@@ -110,7 +112,9 @@ class VaultDatabase:
     # delete all entries
     def delete_all_entries(self):
         # remove all entires 
-        self.cursor.execute("DELETE FROM entries")
+        self.cursor.execute(
+            "DELETE FROM entries"
+            )
 
         # save the database state
         self.connection.commit()
@@ -118,7 +122,9 @@ class VaultDatabase:
     # get all entries 
     def get_all_entries(self):
         # select all entries from the database
-        self.cursor.execute("SELECT * FROM entries")
+        self.cursor.execute(
+            "SELECT * FROM entries"
+            )
 
         # save all entires into a variable
         entries = self.cursor.fetchall()
@@ -131,11 +137,35 @@ class VaultDatabase:
         # return the lsit of all entries
         return all_entries
     
-    def modified_timestamp(self):
-        now = datetime.now().isoformat()
+    # get the current time to set the timestamps (idk if this is useful actaully)
+    def get_now(self):
+        now = datetime.now().strftime("%Y-%m-%d %H:%M")
 
+        return now
+    
+    # get the total number of entries
+    def count(self):
         self.cursor.execute(
-            "UPDATE entries SET modified_at = ?", (now, )
+            "SELECT COUNT(*) FROM entries"
+            )
+
+        count = self.cursor.fetchone()[0]
+
+        return count
+    
+    # get the total number of mfa active
+    def count_mfa(self):
+        self.cursor.execute(
+            "SELECT COUNT(*) FROM entries WHERE totp_secret IS NOT NULL"
+                            )
+
+        mfa_count = self.cursor.fetchone()[0]
+
+        return mfa_count
+    
+    def toggle_favorite(self, favorite, id):
+        self.cursor.execute(
+            "UPDATE entries SET favorite = ? WHERE id = ?", (favorite, id,)
         )
 
         self.connection.commit()

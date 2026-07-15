@@ -78,7 +78,7 @@ class UserDatabase:
 
     # set the last logon time
     def last_logon(self):
-        now = datetime.now().isoformat()
+        now = datetime.now().strftime("%Y-%m-%d %H:%M")
 
         self.cursor.execute(
             "UPDATE user SET last_logon_timestamp = ?", (now, )
@@ -88,7 +88,7 @@ class UserDatabase:
 
     # set the last logout time
     def last_logout(self):
-        now = datetime.now().isoformat()
+        now = datetime.now().strftime("%Y-%m-%d %H:%M")
 
         self.cursor.execute(
             "UPDATE user SET last_logout_timestamp = ?", (now, )
@@ -98,7 +98,7 @@ class UserDatabase:
     
     # set the last fail attempt time
     def last_failed_attempt(self):
-        now = datetime.now().isoformat()
+        now = datetime.now().strftime("%Y-%m-%d %H:%M")
 
         self.cursor.execute(
             "UPDATE user SET last_failed_attempt_timestamp = ?", (now, )
@@ -108,7 +108,7 @@ class UserDatabase:
 
     # set the last changed time
     def last_changed(self):
-        now = datetime.now().isoformat()
+        now = datetime.now().strftime("%Y-%m-%d %H:%M")
 
         self.cursor.execute(
             "UPDATE user SET last_changed_timestamp = ?", (now, )
@@ -120,6 +120,23 @@ class UserDatabase:
     def set_last_changed_entry(self, entry_number):
         self.cursor.execute(
             "UPDATE user SET entry_changed = ?", (entry_number,)
+        )
+    
+    # change the password
+    def change_password(self, password):
+        self.cursor.execute(
+            "UPDATE user SET password_hash = ?", (password,)
+        )
+    
+    def update_salt(self, salt):
+        self.cursor.execute(
+            "UPDATE user SET salt = ?", (salt,)
+        )
+
+    # change the username 
+    def change_username(self, username):
+        self.cursor.execute(
+            "UPDATE user SET username = ?", (username,)
         )
 
     # increment the number of failed sign in attempts
@@ -140,7 +157,7 @@ class UserDatabase:
 
     # set the timestamp that the user was locked out
     def lockout_timestamp(self):
-        now = datetime.now().isoformat()
+        now = datetime.now().strftime("%Y-%m-%d %H:%M")
 
         self.cursor.execute(
             "UPDATE user SET lockout_timestamp = ?", (now, )
@@ -154,9 +171,12 @@ class UserDatabase:
             "SELECT lockout_timestamp FROM user"
         )
 
-        result = self.cursor.fetchone()[0]
+        result = self.cursor.fetchone()
 
-        return result is not None
+        if result is None:
+            return False
+        
+        return result[0] is not None
     
     # clear the lockout timestamp
     def clear_lockout(self):
@@ -198,4 +218,10 @@ class UserDatabase:
 
         return self.cursor.fetchone()[0]
     
-    
+    # get the last time the user logged on
+    def get_last_logon(self):
+        self.cursor.execute(
+            "SELECT last_logon_timestamp FROM user"
+            )
+        
+        return self.cursor.fetchone()[0]

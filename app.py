@@ -58,10 +58,12 @@ class App:
         password_hash = PasswordHelper.sha256_hash_util(password, salt)
 
         # derive our key for symmetirc encryption
-        self.key = PasswordHelper.derive_key(password, salt)
+        self.key = PasswordHelper.derive_key(password.encode(), salt)
 
         # create the user
         self.userDB.create_user(challenge_text, response_hash, username, password_hash, salt)
+
+        self.userDB.last_logon()
 
         self._vault()
     
@@ -106,6 +108,7 @@ class App:
             username = input("> ")
 
             self._type_effect("Password:")
+            password = getpass.getpass("> ")
             hashed_password = PasswordHelper.sha256_hash_util(password, salt)
         
         # if the number of failed login attemps have reached the max then lockout
@@ -118,20 +121,23 @@ class App:
             self.userDB.lockout_timestamp()
             sys.exit(1)
 
-        self.key = PasswordHelper.derive_key(password, salt)
+        self.key = PasswordHelper.derive_key(password.encode(), salt)
 
         # loading
         os.system('cls' if os.name == 'nt' else 'clear')
         self._type_effect("Initilizing Vault...")
         time.sleep(3)
-
+        
         os.system('cls' if os.name == 'nt' else 'clear')
         self._type_effect(f"Welcome Back {username}")
-        
+        time.sleep(3)
+
+        self.userDB.reset_failed_attempts()
+        self.userDB.last_logon()
         # move to vault screen
         self._vault()
     
-    def _type_effect(self, text, delay=0.5):
+    def _type_effect(self, text, delay=0.09):
         # loop through the text and print the characters one by one
         for char in text:
             # print the char, prevent automatic line breaks with end='', print instantly with flush=True
@@ -142,6 +148,6 @@ class App:
         print()
 
     def _vault(self):
-        ui = PasswordVault(self.vaultDB, self.key)
+        ui = PasswordVault(self.vaultDB, self.key, self.userDB)
         ui.run()
 
