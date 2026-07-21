@@ -24,7 +24,7 @@ Git
 1. Clone the repository
 bash
 git clone https://github.com/thaischung/PasswordVault.git
-cd Password_Vault_Py
+cd PasswordVault
 
 2. Make the setup script executable and run it
 bash
@@ -48,7 +48,7 @@ bash
 1. Clone the repository
 bash
 git clone https://github.com/thaischung/PasswordVault.git
-cd Password_Vault_Py
+cd PasswordVault
 
 2. Make the setup script executable and run it
 bash
