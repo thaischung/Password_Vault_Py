@@ -75,21 +75,6 @@ A challenge question and response — used to verify your identity before the pa
 
 After setup you will be taken directly to the vault.
 
-**Keyboard Shortcuts**
-Key	Action
-Ctrl+A	Add entry
-Ctrl+E	Edit entry
-Ctrl+D	Delete entry
-Ctrl+S	Search
-Ctrl+Y	Copy password
-Ctrl+U	Copy username
-Ctrl+T	Copy MFA code
-Ctrl+F	Toggle favorite
-Ctrl+C	Change master password
-Ctrl+K	Delete all entries
-?	Help screen
-ESC	Close / Cancel
-
 **Security**
 All vault entries are encrypted with AES-256-CBC
 Master key is derived using PBKDF2-HMAC-SHA256 with 10,000 iterations
